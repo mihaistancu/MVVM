@@ -6,6 +6,14 @@ namespace Accounting.ViewModels
 {
     class ContractSelectionViewModel
     {
+        public ObservableCollection<Contract> Providers { get; set; }
+
+        public Contract SelectedProvider { get; set; }
+
+        public ObservableCollection<Contract> Buyers { get; set; }
+
+        public Contract SelectedBuyer { get; set; }
+
         public ObservableCollection<Contract> Contracts { get; set; }
 
         public Contract SelectedContract { get; set; }
