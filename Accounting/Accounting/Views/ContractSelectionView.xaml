@@ -16,8 +16,8 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <TextBlock Text="{Binding SelectedContract.Provider.Name}"></TextBlock>
-            <TextBlock Text="{Binding SelectedContract.Buyer.Name}"></TextBlock>
+            <ComboBox ItemsSource="{Binding Providers}"  SelectedItem="{Binding SelectedProvider}" DisplayMemberPath="Name"></ComboBox>
+            <ComboBox ItemsSource="{Binding Buyers}" SelectedItem="{Binding SelectedBuyer}" DisplayMemberPath="Name"></ComboBox>
         </StackPanel>
         <ComboBox Grid.Column="1" ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}" DisplayMemberPath="Number"></ComboBox>
     </Grid>
