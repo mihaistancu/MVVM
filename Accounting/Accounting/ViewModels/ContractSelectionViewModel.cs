@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace Accounting.ViewModels
 {
-    class ContractSelectionViewModel
+    public class ContractSelectionViewModel
     {
         public ObservableCollection<Provider> Providers { get; set; }
 
