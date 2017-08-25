@@ -16,7 +16,21 @@ namespace Accounting.ViewModels
 
         public ObservableCollection<Contract> Contracts { get; set; }
 
-        public Contract SelectedContract { get; set; }
+        private Contract selectedContract { get; set; }
+
+        public Contract SelectedContract
+        {
+            get
+            {
+                return selectedContract;
+            }
+            set
+            {
+                selectedContract = value;
+                SelectedProvider = selectedContract.Provider;
+                SelectedBuyer = selectedContract.Buyer;
+            }
+        }
 
         public ContractSelectionViewModel()
         {
