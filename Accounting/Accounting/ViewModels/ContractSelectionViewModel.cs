@@ -1,22 +1,50 @@
 ﻿using Accounting.Models;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Accounting.ViewModels
 {
-    public class ContractSelectionViewModel
+    public class ContractSelectionViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<Provider> Providers { get; set; }
 
-        public Provider SelectedProvider { get; set; }
+        private Provider selectedProvider;
+
+        public Provider SelectedProvider
+        {
+            get
+            {
+                return selectedProvider;
+            }
+            set
+            {
+                selectedProvider = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Buyer> Buyers { get; set; }
 
-        public Buyer SelectedBuyer { get; set; }
+        private Buyer selectedBuyer;
+        
+        public Buyer SelectedBuyer
+        {
+            get
+            {
+                return selectedBuyer;
+            }
+            set
+            {
+                selectedBuyer = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<Contract> Contracts { get; set; }
 
-        private Contract selectedContract { get; set; }
+        private Contract selectedContract;
 
         public Contract SelectedContract
         {
@@ -27,6 +55,8 @@ namespace Accounting.ViewModels
             set
             {
                 selectedContract = value;
+                OnPropertyChanged();
+
                 SelectedProvider = selectedContract.Provider;
                 SelectedBuyer = selectedContract.Buyer;
             }
@@ -46,6 +76,13 @@ namespace Accounting.ViewModels
             Providers = new ObservableCollection<Provider>(new[] { provider1, provider2 });
             Buyers = new ObservableCollection<Buyer>(new[] { buyer1, buyer2 });
             Contracts = new ObservableCollection<Contract>(new[] { contract1, contract2 });
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
