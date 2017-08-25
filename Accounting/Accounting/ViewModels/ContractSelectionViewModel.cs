@@ -12,35 +12,14 @@ namespace Accounting.ViewModels
 
         public ContractSelectionViewModel()
         {
-            Contracts = new ObservableCollection<Contract>(new []
-            {
-                new Contract
-                {
-                    Number = "1",
-                    Provider = new Provider
-                    {
-                        Name = "Provider1"
-                    },
-                    Buyer=new Buyer
-                    {
-                        Name = "Buyer1",
-                        DateOfBirth = new DateTime(1990,1,1)
-                    }
-                },
-                new Contract
-                {
-                    Number = "2",
-                    Provider = new Provider
-                    {
-                        Name = "Provider2"
-                    },
-                    Buyer=new Buyer
-                    {
-                        Name = "Buyer2",
-                        DateOfBirth = new DateTime(1990,2,2)
-                    }
-                }
-            });
+            var provider1 = new Provider { Name = "Provider1" };
+            var provider2 = new Provider { Name = "Provider2" };
+
+            var buyer1 = new Buyer { Name = "Buyer1", DateOfBirth = new DateTime(1990, 1, 1) };
+            var buyer2 = new Buyer { Name = "Buyer2", DateOfBirth = new DateTime(1990, 2, 2) };
+
+            var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
+            var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
         }
     }
 }
