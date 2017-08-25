@@ -6,13 +6,13 @@ namespace Accounting.ViewModels
 {
     class ContractSelectionViewModel
     {
-        public ObservableCollection<Contract> Providers { get; set; }
+        public ObservableCollection<Provider> Providers { get; set; }
 
-        public Contract SelectedProvider { get; set; }
+        public Provider SelectedProvider { get; set; }
 
-        public ObservableCollection<Contract> Buyers { get; set; }
+        public ObservableCollection<Buyer> Buyers { get; set; }
 
-        public Contract SelectedBuyer { get; set; }
+        public Buyer SelectedBuyer { get; set; }
 
         public ObservableCollection<Contract> Contracts { get; set; }
 
@@ -28,6 +28,10 @@ namespace Accounting.ViewModels
 
             var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
             var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
+
+            Providers = new ObservableCollection<Provider>(new[] { provider1, provider2 });
+            Buyers = new ObservableCollection<Buyer>(new[] { buyer1, buyer2 });
+            Contracts = new ObservableCollection<Contract>(new[] { contract1, contract2 });
         }
     }
 }
