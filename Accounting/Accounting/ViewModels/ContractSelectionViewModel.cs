@@ -1,6 +1,6 @@
 ﻿using Accounting.Models;
 using System;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -8,7 +8,20 @@ namespace Accounting.ViewModels
 {
     public class ContractSelectionViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<Provider> Providers { get; set; }
+        private List<Provider> providers;
+
+        public List<Provider> Providers
+        {
+            get
+            {
+                return providers;
+            }
+            set
+            {
+                providers = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Provider selectedProvider;
 
@@ -25,7 +38,20 @@ namespace Accounting.ViewModels
             }
         }
 
-        public ObservableCollection<Buyer> Buyers { get; set; }
+        private List<Buyer> buyers;
+
+        public List<Buyer> Buyers
+        {
+            get
+            {
+                return buyers;
+            }
+            set
+            {
+                buyers = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Buyer selectedBuyer;
         
@@ -42,7 +68,20 @@ namespace Accounting.ViewModels
             }
         }
 
-        public ObservableCollection<Contract> Contracts { get; set; }
+        private List<Contract> contracts;
+
+        public List<Contract> Contracts
+        {
+            get
+            {
+                return contracts;
+            }
+            set
+            {
+                contracts = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Contract selectedContract;
 
@@ -73,9 +112,9 @@ namespace Accounting.ViewModels
             var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
             var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
 
-            Providers = new ObservableCollection<Provider>(new[] { provider1, provider2 });
-            Buyers = new ObservableCollection<Buyer>(new[] { buyer1, buyer2 });
-            Contracts = new ObservableCollection<Contract>(new[] { contract1, contract2 });
+            Providers = new List<Provider>(new[] { provider1, provider2 });
+            Buyers = new List<Buyer>(new[] { buyer1, buyer2 });
+            Contracts = new List<Contract>(new[] { contract1, contract2 });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
