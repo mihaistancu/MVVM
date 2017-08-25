@@ -19,7 +19,7 @@ namespace Accounting.Tests
         {
             var viewModel = new ContractSelectionViewModel();
 
-            viewModel.SelectedContract = viewModel.Contracts.First();
+            viewModel.SelectedContract = viewModel.FilteredContracts.First();
 
             Assert.AreEqual(viewModel.SelectedContract.Provider, viewModel.SelectedProvider);
             Assert.AreEqual(viewModel.SelectedContract.Buyer, viewModel.SelectedBuyer);

@@ -8,17 +8,17 @@ namespace Accounting.ViewModels
 {
     public class ContractSelectionViewModel : INotifyPropertyChanged
     {
-        private List<Provider> providers;
+        private List<Provider> filteredProviders;
 
-        public List<Provider> Providers
+        public List<Provider> FilteredProviders
         {
             get
             {
-                return providers;
+                return filteredProviders;
             }
             set
             {
-                providers = value;
+                filteredProviders = value;
                 OnPropertyChanged();
             }
         }
@@ -38,17 +38,17 @@ namespace Accounting.ViewModels
             }
         }
 
-        private List<Buyer> buyers;
+        private List<Buyer> filteredBuyers;
 
-        public List<Buyer> Buyers
+        public List<Buyer> FilteredBuyers
         {
             get
             {
-                return buyers;
+                return filteredBuyers;
             }
             set
             {
-                buyers = value;
+                filteredBuyers = value;
                 OnPropertyChanged();
             }
         }
@@ -68,17 +68,17 @@ namespace Accounting.ViewModels
             }
         }
 
-        private List<Contract> contracts;
+        private List<Contract> filteredContracts;
 
-        public List<Contract> Contracts
+        public List<Contract> FilteredContracts
         {
             get
             {
-                return contracts;
+                return filteredContracts;
             }
             set
             {
-                contracts = value;
+                filteredContracts = value;
                 OnPropertyChanged();
             }
         }
@@ -112,9 +112,9 @@ namespace Accounting.ViewModels
             var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
             var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
 
-            Providers = new List<Provider>(new[] { provider1, provider2 });
-            Buyers = new List<Buyer>(new[] { buyer1, buyer2 });
-            Contracts = new List<Contract>(new[] { contract1, contract2 });
+            FilteredProviders = new List<Provider>(new[] { provider1, provider2 });
+            FilteredBuyers = new List<Buyer>(new[] { buyer1, buyer2 });
+            FilteredContracts = new List<Contract>(new[] { contract1, contract2 });
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

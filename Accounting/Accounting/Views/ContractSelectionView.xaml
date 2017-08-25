@@ -16,9 +16,9 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0">
-            <ComboBox ItemsSource="{Binding Providers}"  SelectedItem="{Binding SelectedProvider}" DisplayMemberPath="Name"></ComboBox>
-            <ComboBox ItemsSource="{Binding Buyers}" SelectedItem="{Binding SelectedBuyer}" DisplayMemberPath="Name"></ComboBox>
+            <ComboBox ItemsSource="{Binding FilteredProviders}"  SelectedItem="{Binding SelectedProvider}" DisplayMemberPath="Name"></ComboBox>
+            <ComboBox ItemsSource="{Binding FilteredBuyers}" SelectedItem="{Binding SelectedBuyer}" DisplayMemberPath="Name"></ComboBox>
         </StackPanel>
-        <ComboBox Grid.Column="1" ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}" DisplayMemberPath="Number"></ComboBox>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding FilteredContracts}" SelectedItem="{Binding SelectedContract}" DisplayMemberPath="Number"></ComboBox>
     </Grid>
 </UserControl>
