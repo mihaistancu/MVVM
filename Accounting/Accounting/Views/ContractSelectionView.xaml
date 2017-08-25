@@ -1,0 +1,16 @@
+﻿<UserControl x:Class="Accounting.Views.ContractSelectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:Accounting.Views"
+             xmlns:vm="clr-namespace:Accounting.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <vm:ContractSelectionViewModel></vm:ContractSelectionViewModel>
+    </UserControl.DataContext>
+    <Grid>
+        <ComboBox ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}"></ComboBox>
+    </Grid>
+</UserControl>
