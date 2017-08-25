@@ -11,6 +11,14 @@
         <vm:ContractSelectionViewModel></vm:ContractSelectionViewModel>
     </UserControl.DataContext>
     <Grid>
-        <ComboBox ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}" DisplayMemberPath="Number"></ComboBox>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0">
+            <TextBlock Text="{Binding SelectedContract.Provider.Name}"></TextBlock>
+            <TextBlock Text="{Binding SelectedContract.Buyer.Name}"></TextBlock>
+        </StackPanel>
+        <ComboBox Grid.Column="1" ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}" DisplayMemberPath="Number"></ComboBox>
     </Grid>
 </UserControl>
