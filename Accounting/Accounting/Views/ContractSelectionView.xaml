@@ -11,6 +11,6 @@
         <vm:ContractSelectionViewModel></vm:ContractSelectionViewModel>
     </UserControl.DataContext>
     <Grid>
-        <ComboBox ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}"></ComboBox>
+        <ComboBox ItemsSource="{Binding Contracts}" SelectedItem="{Binding SelectedContract}" DisplayMemberPath="Number"></ComboBox>
     </Grid>
 </UserControl>

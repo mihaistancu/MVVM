@@ -16,6 +16,7 @@ namespace Accounting.ViewModels
             {
                 new Contract
                 {
+                    Number = "1",
                     Provider = new Provider
                     {
                         Name = "Provider1"
@@ -28,6 +29,7 @@ namespace Accounting.ViewModels
                 },
                 new Contract
                 {
+                    Number = "2",
                     Provider = new Provider
                     {
                         Name = "Provider2"
