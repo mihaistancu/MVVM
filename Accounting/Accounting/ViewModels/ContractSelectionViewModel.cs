@@ -15,95 +15,48 @@ namespace Accounting.ViewModels
 
         public List<Provider> FilteredProviders
         {
-            get
-            {
-                return filteredProviders;
-            }
-            set
-            {
-                filteredProviders = value;
-                OnPropertyChanged();
-            }
+            get { return filteredProviders; }
+            set { SetProperty(ref filteredProviders, value); }
         }
 
         private Provider selectedProvider;
 
         public Provider SelectedProvider
         {
-            get
-            {
-                return selectedProvider;
-            }
-            set
-            {
-                selectedProvider = value;
-                OnPropertyChanged();
-                OnSelectedProviderChanged();
-            }
+            get { return selectedProvider; }
+            set { SetProperty(ref selectedProvider, value, OnSelectedProviderChanged); }
         }
 
         private List<Buyer> filteredBuyers;
 
         public List<Buyer> FilteredBuyers
         {
-            get
-            {
-                return filteredBuyers;
-            }
-            set
-            {
-                filteredBuyers = value;
-                OnPropertyChanged();
-            }
+            get { return filteredBuyers; }
+            set { SetProperty(ref filteredBuyers, value); }
         }
 
         private Buyer selectedBuyer;
 
         public Buyer SelectedBuyer
         {
-            get
-            {
-                return selectedBuyer;
-            }
-            set
-            {
-                selectedBuyer = value;
-                OnPropertyChanged();
-                OnSelectedBuyerChanged();
-            }
+            get { return selectedBuyer; }
+            set { SetProperty(ref selectedBuyer, value, OnSelectedBuyerChanged); }
         }
 
         private List<Contract> filteredContracts;
 
         public List<Contract> FilteredContracts
         {
-            get
-            {
-                return filteredContracts;
-            }
-            set
-            {
-                filteredContracts = value;
-                OnPropertyChanged();
-            }
+            get { return filteredContracts; }
+            set { SetProperty(ref filteredContracts, value); }
         }
 
         private Contract selectedContract;
 
         public Contract SelectedContract
         {
-            get
-            {
-                return selectedContract;
-            }
-            set
-            {
-                if (selectedContract == value) return;
-
-                selectedContract = value;
-                OnPropertyChanged();
-                OnSelectedContractChanged();
-            }
+            get { return selectedContract; }
+            set { SetProperty(ref selectedContract, value, OnSelectedContractChanged); }
         }
 
         private void OnSelectedProviderChanged()
