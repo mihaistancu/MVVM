@@ -94,6 +94,7 @@ namespace Accounting.ViewModels
                     else
                     {
                         FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+                        FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
                     }
                 }
             }

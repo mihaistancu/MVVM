@@ -75,6 +75,21 @@ namespace Accounting.Tests
         }
 
         [TestMethod]
+        public void GivenProviderIsSelectedWhenBuyerIsSelectedThenTheFilteredProvidersAreUpdated()
+        {
+            var providerToSelect = viewModel.FilteredProviders.First();
+            var buyerToSelect = viewModel.FilteredBuyers.First();
+            var expectedFilteredProviders = viewModel.FilteredContracts
+                .Where(c => c.Provider == providerToSelect && c.Buyer == buyerToSelect)
+                .Select(c=>c.Provider).ToList();
+
+            viewModel.SelectedProvider = providerToSelect;
+            viewModel.SelectedBuyer = buyerToSelect;
+
+            CollectionAssert.AreEqual(expectedFilteredProviders, viewModel.FilteredProviders);
+        }
+
+        [TestMethod]
         public void GivenBuyerIsSelectedWhenProviderIsSelectedThenTheFilteredContractsAreUpdated()
         {
             var providerToSelect = viewModel.FilteredProviders.First();
@@ -98,6 +113,20 @@ namespace Accounting.Tests
             CollectionAssert.AreEqual(new[] { viewModel.SelectedContract }, viewModel.FilteredContracts);
             CollectionAssert.AreEqual(new[] { viewModel.SelectedProvider }, viewModel.FilteredProviders);
             CollectionAssert.AreEqual(new[] { viewModel.SelectedBuyer }, viewModel.FilteredBuyers);
+        }
+
+
+        [TestMethod]
+        public void GivenProviderIsSelectedWhenBuyerIsSelectedThenTheFilteredContractsAndProvidersAreUpdated()
+        {
+            var buyerToSelect = viewModel.FilteredBuyers.First();
+            var expectedFilteredContracts = viewModel.FilteredContracts.Where(c => c.Buyer == buyerToSelect).ToList();
+            var expectedFilteredProviders = expectedFilteredContracts.Select(c => c.Provider).Distinct().ToList();
+
+            viewModel.SelectedBuyer = buyerToSelect;
+
+            CollectionAssert.AreEqual(expectedFilteredContracts, viewModel.FilteredContracts);
+            CollectionAssert.AreEqual(expectedFilteredProviders, viewModel.FilteredProviders);
         }
     }
 }
