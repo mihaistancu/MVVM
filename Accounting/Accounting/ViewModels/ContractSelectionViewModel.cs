@@ -97,6 +97,8 @@ namespace Accounting.ViewModels
             }
             set
             {
+                if (selectedContract == value) return;
+
                 selectedContract = value;
                 OnPropertyChanged();
 
