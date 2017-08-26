@@ -73,5 +73,19 @@ namespace Accounting.Tests
 
             CollectionAssert.AreEqual(expectedFilteredContracts, viewModel.FilteredContracts);
         }
+
+        [TestMethod]
+        public void GivenABuyerIsSelectedWhenAProviderIsSelectedThenTheFilteredContractsAreUpdated()
+        {
+            var providerToSelect = viewModel.FilteredProviders.First();
+            var buyerToSelect = viewModel.FilteredBuyers.Skip(1).First();
+            var expectedFilteredContracts = viewModel.FilteredContracts
+                .Where(c => c.Provider == providerToSelect && c.Buyer == buyerToSelect).ToList();
+            
+            viewModel.SelectedBuyer = buyerToSelect;
+            viewModel.SelectedProvider = providerToSelect;
+
+            CollectionAssert.AreEqual(expectedFilteredContracts, viewModel.FilteredContracts);
+        }
     }
 }

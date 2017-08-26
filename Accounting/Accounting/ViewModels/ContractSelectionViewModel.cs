@@ -41,10 +41,17 @@ namespace Accounting.ViewModels
                 selectedProvider = value;
                 OnPropertyChanged();
 
-                if (selectedContract == null && selectedBuyer == null)
+                if (selectedContract == null)
                 {
-                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
-                    FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+                    if (selectedBuyer == null)
+                    {
+                        FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
+                        FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+                    }
+                    else
+                    {
+                        FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+                    }
                 }
             }
         }
