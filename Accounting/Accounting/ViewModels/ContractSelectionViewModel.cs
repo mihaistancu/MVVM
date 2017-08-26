@@ -8,6 +8,10 @@ namespace Accounting.ViewModels
 {
     public class ContractSelectionViewModel : INotifyPropertyChanged
     {
+        private List<Provider> allProviders;
+        private List<Buyer> allBuyers;
+        private List<Contract> allContracts;
+
         private List<Provider> filteredProviders;
 
         public List<Provider> FilteredProviders
@@ -112,9 +116,13 @@ namespace Accounting.ViewModels
             var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
             var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
 
-            FilteredProviders = new List<Provider>(new[] { provider1, provider2 });
-            FilteredBuyers = new List<Buyer>(new[] { buyer1, buyer2 });
-            FilteredContracts = new List<Contract>(new[] { contract1, contract2 });
+            allProviders = new List<Provider>(new[] { provider1, provider2 });
+            allBuyers = new List<Buyer>(new[] { buyer1, buyer2 });
+            allContracts = new List<Contract>(new[] { contract1, contract2 });
+
+            filteredProviders = allProviders;
+            filteredBuyers = allBuyers;
+            filteredContracts = allContracts;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
