@@ -57,6 +57,15 @@ namespace Accounting.ViewModels
             get { return selectedContract; }
             set { SetProperty(ref selectedContract, value, OnSelectedContractChanged); }
         }
+        
+        public ContractSelectionViewModel()
+        {
+            contractsService = new ContractsService();
+
+            FilteredContracts = contractsService.GetAllContracts();
+            FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+            FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+        }
 
         private void OnSelectedProviderChanged()
         {
@@ -84,15 +93,6 @@ namespace Accounting.ViewModels
             FilteredProviders = new List<Provider> { selectedContract.Provider };
             FilteredBuyers = new List<Buyer> { selectedContract.Buyer };
             FilteredContracts = new List<Contract> { selectedContract };
-        }
-
-        public ContractSelectionViewModel()
-        {
-            contractsService = new ContractsService();
-
-            FilteredContracts = contractsService.GetAllContracts();
-            FilteredProviders = FilteredContracts.Select(c=>c.Provider).Distinct().ToList();
-            FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
         }
     }
 }
