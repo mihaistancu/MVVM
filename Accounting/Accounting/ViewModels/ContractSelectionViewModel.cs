@@ -61,28 +61,18 @@ namespace Accounting.ViewModels
 
         private void OnSelectedProviderChanged()
         {
-            if (selectedBuyer == null)
-            {
-                FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
-            }
-            else
-            {
-                FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-            }
+            FilteredContracts = selectedBuyer == null
+                ? allContracts.Where(c => c.Provider == selectedProvider).ToList()
+                : allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
 
             FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
         }
 
         private void OnSelectedBuyerChanged()
         {
-            if (selectedProvider == null)
-            {
-                FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
-            }
-            else
-            {
-                FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-            }
+            FilteredContracts = selectedProvider == null
+                ? allContracts.Where(c => c.Buyer == selectedBuyer).ToList()
+                : allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
 
             FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
         }
