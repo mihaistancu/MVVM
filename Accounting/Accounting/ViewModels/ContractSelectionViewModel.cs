@@ -1,13 +1,11 @@
 ﻿using Accounting.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 
 namespace Accounting.ViewModels
 {
-    public class ContractSelectionViewModel : INotifyPropertyChanged
+    public class ContractSelectionViewModel : BindableBase
     {
         private List<Provider> allProviders;
         private List<Buyer> allBuyers;
@@ -171,13 +169,6 @@ namespace Accounting.ViewModels
             filteredProviders = allProviders;
             filteredBuyers = allBuyers;
             filteredContracts = allContracts;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
