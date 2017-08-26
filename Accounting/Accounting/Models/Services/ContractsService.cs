@@ -27,17 +27,17 @@ namespace Accounting.Models.Services
             allContracts = new List<Contract>(new[] { contract1, contract2, contract3 });
         }
 
-        public List<Contract> GetContractsByProvider(Provider provider)
+        public List<Contract> GetContractsBy(Provider provider)
         {
             return allContracts.Where(c => c.Provider == provider).ToList();
         }
         
-        public List<Contract> GetContractsByBuyer(Buyer buyer)
+        public List<Contract> GetContractsBy(Buyer buyer)
         {
             return allContracts.Where(c => c.Buyer == buyer).ToList();
         }
 
-        public List<Contract> GetContractsByProviderAndBuyer(Provider provider, Buyer buyer)
+        public List<Contract> GetContractsBy(Provider provider, Buyer buyer)
         {
             return allContracts.Where(c => c.Provider == provider && c.Buyer == buyer).ToList();
         }

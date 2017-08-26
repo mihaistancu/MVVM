@@ -70,8 +70,8 @@ namespace Accounting.ViewModels
         private void OnSelectedProviderChanged()
         {
             FilteredContracts = selectedBuyer == null
-                ? contractsService.GetContractsByProvider(selectedProvider)
-                : contractsService.GetContractsByProviderAndBuyer(selectedProvider, selectedBuyer);
+                ? contractsService.GetContractsBy(selectedProvider)
+                : contractsService.GetContractsBy(selectedProvider, selectedBuyer);
 
             FilteredBuyers = GetFilteredBuyers();
         }
@@ -79,8 +79,8 @@ namespace Accounting.ViewModels
         private void OnSelectedBuyerChanged()
         {
             FilteredContracts = selectedProvider == null
-                ? contractsService.GetContractsByBuyer(selectedBuyer)
-                : contractsService.GetContractsByProviderAndBuyer(selectedProvider, selectedBuyer);
+                ? contractsService.GetContractsBy(selectedBuyer)
+                : contractsService.GetContractsBy(selectedProvider, selectedBuyer);
 
             FilteredProviders = GetFilteredProviders();
         }
