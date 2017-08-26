@@ -46,13 +46,13 @@ namespace Accounting.ViewModels
                     if (selectedBuyer == null)
                     {
                         FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
-                        FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
                     }
                     else
                     {
                         FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-                        FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
                     }
+
+                    FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
                 }
             }
         }
@@ -89,14 +89,14 @@ namespace Accounting.ViewModels
                 {
                     if (selectedProvider == null)
                     {
-                        FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
-                        FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+                        FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();                        
                     }
                     else
                     {
                         FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-                        FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
                     }
+
+                    FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
                 }
             }
         }
