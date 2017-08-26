@@ -61,36 +61,30 @@ namespace Accounting.ViewModels
 
         private void OnSelectedProviderChanged()
         {
-            if (selectedContract == null)
+            if (selectedBuyer == null)
             {
-                if (selectedBuyer == null)
-                {
-                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
-                }
-                else
-                {
-                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-                }
-
-                FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+                FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
             }
+            else
+            {
+                FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+            }
+
+            FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
         }
 
         private void OnSelectedBuyerChanged()
         {
-            if (selectedContract == null)
+            if (selectedProvider == null)
             {
-                if (selectedProvider == null)
-                {
-                    FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
-                }
-                else
-                {
-                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-                }
-
-                FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+                FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
             }
+            else
+            {
+                FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+            }
+
+            FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
         }
 
         private void OnSelectedContractChanged()
