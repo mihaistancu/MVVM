@@ -77,10 +77,17 @@ namespace Accounting.ViewModels
                 selectedBuyer = value;
                 OnPropertyChanged();
 
-                if (selectedContract == null && selectedProvider == null)
+                if (selectedContract == null)
                 {
-                    FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
-                    FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+                    if (selectedProvider == null)
+                    {
+                        FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
+                        FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+                    }
+                    else
+                    {
+                        FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+                    }
                 }
             }
         }
@@ -134,10 +141,11 @@ namespace Accounting.ViewModels
 
             var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
             var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
+            var contract3 = new Contract { Number = "4", Provider = provider1, Buyer = buyer2 };
 
             allProviders = new List<Provider>(new[] { provider1, provider2 });
             allBuyers = new List<Buyer>(new[] { buyer1, buyer2 });
-            allContracts = new List<Contract>(new[] { contract1, contract2 });
+            allContracts = new List<Contract>(new[] { contract1, contract2,  contract3 });
 
             filteredProviders = allProviders;
             filteredBuyers = allBuyers;
