@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Accounting.ViewModels
@@ -39,6 +40,12 @@ namespace Accounting.ViewModels
             {
                 selectedProvider = value;
                 OnPropertyChanged();
+
+                if (selectedContract == null && selectedBuyer == null)
+                {
+                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
+                    FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+                }
             }
         }
 
@@ -69,6 +76,12 @@ namespace Accounting.ViewModels
             {
                 selectedBuyer = value;
                 OnPropertyChanged();
+
+                if (selectedContract == null && selectedProvider == null)
+                {
+                    FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
+                    FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+                }
             }
         }
 
