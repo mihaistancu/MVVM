@@ -40,20 +40,7 @@ namespace Accounting.ViewModels
             {
                 selectedProvider = value;
                 OnPropertyChanged();
-
-                if (selectedContract == null)
-                {
-                    if (selectedBuyer == null)
-                    {
-                        FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
-                    }
-                    else
-                    {
-                        FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-                    }
-
-                    FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
-                }
+                OnSelectedProviderChanged();
             }
         }
 
@@ -73,7 +60,7 @@ namespace Accounting.ViewModels
         }
 
         private Buyer selectedBuyer;
-        
+
         public Buyer SelectedBuyer
         {
             get
@@ -84,20 +71,7 @@ namespace Accounting.ViewModels
             {
                 selectedBuyer = value;
                 OnPropertyChanged();
-
-                if (selectedContract == null)
-                {
-                    if (selectedProvider == null)
-                    {
-                        FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();                        
-                    }
-                    else
-                    {
-                        FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
-                    }
-
-                    FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
-                }
+                OnSelectedBuyerChanged();
             }
         }
 
@@ -130,14 +104,52 @@ namespace Accounting.ViewModels
 
                 selectedContract = value;
                 OnPropertyChanged();
-
-                SelectedProvider = selectedContract.Provider;
-                SelectedBuyer = selectedContract.Buyer;
-
-                FilteredProviders = new List<Provider> { selectedContract.Provider };
-                FilteredBuyers = new List<Buyer> { selectedContract.Buyer };
-                FilteredContracts = new List<Contract> { selectedContract };
+                OnSelectedContractChanged();
             }
+        }
+
+        private void OnSelectedProviderChanged()
+        {
+            if (selectedContract == null)
+            {
+                if (selectedBuyer == null)
+                {
+                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider).ToList();
+                }
+                else
+                {
+                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+                }
+
+                FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+            }
+        }
+
+        private void OnSelectedBuyerChanged()
+        {
+            if (selectedContract == null)
+            {
+                if (selectedProvider == null)
+                {
+                    FilteredContracts = allContracts.Where(c => c.Buyer == selectedBuyer).ToList();
+                }
+                else
+                {
+                    FilteredContracts = allContracts.Where(c => c.Provider == selectedProvider && c.Buyer == selectedBuyer).ToList();
+                }
+
+                FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+            }
+        }
+
+        private void OnSelectedContractChanged()
+        {
+            SelectedProvider = selectedContract.Provider;
+            SelectedBuyer = selectedContract.Buyer;
+
+            FilteredProviders = new List<Provider> { selectedContract.Provider };
+            FilteredBuyers = new List<Buyer> { selectedContract.Buyer };
+            FilteredContracts = new List<Contract> { selectedContract };
         }
 
         public ContractSelectionViewModel()
