@@ -25,7 +25,7 @@ namespace Accounting.Tests
         }
 
         [TestMethod]
-        public void GivenNothingIsSelectedWhenContractIsSelectedThenTheFilteredProvidersAndBuyersAndContractsContainJustTheItemsThatAreSelected()
+        public void GivenNothingIsSelectedWhenContractIsSelectedThenTheFilteredDataContainsJustTheItemsThatAreSelected()
         {
             viewModel.SelectedContract = viewModel.FilteredContracts.First();
 
@@ -61,7 +61,7 @@ namespace Accounting.Tests
         }
 
         [TestMethod]
-        public void GivenAProviderIsSelectedWhenABuyerIsSelectedThenTheFilteredContractsAreUpdated()
+        public void GivenProviderIsSelectedWhenBuyerIsSelectedThenTheFilteredContractsAreUpdated()
         {
             var providerToSelect = viewModel.FilteredProviders.First();
             var buyerToSelect = viewModel.FilteredBuyers.First();
@@ -75,7 +75,7 @@ namespace Accounting.Tests
         }
 
         [TestMethod]
-        public void GivenABuyerIsSelectedWhenAProviderIsSelectedThenTheFilteredContractsAreUpdated()
+        public void GivenBuyerIsSelectedWhenProviderIsSelectedThenTheFilteredContractsAreUpdated()
         {
             var providerToSelect = viewModel.FilteredProviders.First();
             var buyerToSelect = viewModel.FilteredBuyers.Skip(1).First();
@@ -86,6 +86,18 @@ namespace Accounting.Tests
             viewModel.SelectedProvider = providerToSelect;
 
             CollectionAssert.AreEqual(expectedFilteredContracts, viewModel.FilteredContracts);
+        }
+
+        [TestMethod]
+        public void GivenProviderAndBuyerAreSelectedWhenContractIsSelectedThenTheFilteredDataContainsJustTheItemsThatAreSelected()
+        {
+            viewModel.SelectedProvider = viewModel.FilteredProviders.First();
+            viewModel.SelectedBuyer = viewModel.FilteredBuyers.First();
+            viewModel.SelectedContract = viewModel.FilteredContracts.First();
+
+            CollectionAssert.AreEqual(new[] { viewModel.SelectedContract }, viewModel.FilteredContracts);
+            CollectionAssert.AreEqual(new[] { viewModel.SelectedProvider }, viewModel.FilteredProviders);
+            CollectionAssert.AreEqual(new[] { viewModel.SelectedBuyer }, viewModel.FilteredBuyers);
         }
     }
 }
