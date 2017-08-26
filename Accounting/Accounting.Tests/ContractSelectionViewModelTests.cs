@@ -7,18 +7,17 @@ namespace Accounting.Tests
     [TestClass]
     public class ContractSelectionViewModelTests
     {
-        [TestMethod]
+        ContractSelectionViewModel viewModel;
+
+        [TestInitialize]
         public void ContractSelectionViewModelCanBeInstantiated()
         {
-            var viewModel = new ContractSelectionViewModel();
-            Assert.IsNotNull(viewModel);
+            viewModel = new ContractSelectionViewModel();
         }
 
         [TestMethod]
         public void GivenNothingIsSelectedWhenContractIsSelectedThenTheProviderAndBuyerAreAutomaticallySelected()
         {
-            var viewModel = new ContractSelectionViewModel();
-
             viewModel.SelectedContract = viewModel.FilteredContracts.First();
 
             Assert.AreEqual(viewModel.SelectedContract.Provider, viewModel.SelectedProvider);
@@ -28,8 +27,6 @@ namespace Accounting.Tests
         [TestMethod]
         public void GivenNothingIsSelectedWhenContractIsSelectedThenTheFilteredProvidersAndBuyersAndContractsContainJustTheItemsThatAreSelected()
         {
-            var viewModel = new ContractSelectionViewModel();
-
             viewModel.SelectedContract = viewModel.FilteredContracts.First();
 
             CollectionAssert.AreEqual(new[] { viewModel.SelectedContract }, viewModel.FilteredContracts);
