@@ -15,7 +15,7 @@ namespace Accounting.Tests
         }
 
         [TestMethod]
-        public void WhenContractIsSelectedThenTheSelectedProviderAndSelectedBuyerAreUpdated()
+        public void GivenNothingIsSelectedWhenContractIsSelectedThenTheProviderAndBuyerAreAutomaticallySelected()
         {
             var viewModel = new ContractSelectionViewModel();
 
@@ -23,6 +23,18 @@ namespace Accounting.Tests
 
             Assert.AreEqual(viewModel.SelectedContract.Provider, viewModel.SelectedProvider);
             Assert.AreEqual(viewModel.SelectedContract.Buyer, viewModel.SelectedBuyer);
+        }
+
+        [TestMethod]
+        public void GivenNothingIsSelectedWhenContractIsSelectedThenTheFilteredProvidersAndBuyersAndContractsContainJustTheItemsThatAreSelected()
+        {
+            var viewModel = new ContractSelectionViewModel();
+
+            viewModel.SelectedContract = viewModel.FilteredContracts.First();
+
+            CollectionAssert.AreEqual(new[] { viewModel.SelectedContract }, viewModel.FilteredContracts);
+            CollectionAssert.AreEqual(new[] { viewModel.SelectedProvider }, viewModel.FilteredProviders);
+            CollectionAssert.AreEqual(new[] { viewModel.SelectedBuyer }, viewModel.FilteredBuyers);
         }
     }
 }

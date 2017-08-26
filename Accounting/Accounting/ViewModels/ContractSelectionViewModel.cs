@@ -102,6 +102,10 @@ namespace Accounting.ViewModels
 
                 SelectedProvider = selectedContract.Provider;
                 SelectedBuyer = selectedContract.Buyer;
+
+                FilteredProviders = new List<Provider> { selectedContract.Provider };
+                FilteredBuyers = new List<Buyer> { selectedContract.Buyer };
+                FilteredContracts = new List<Contract> { selectedContract };
             }
         }
 
