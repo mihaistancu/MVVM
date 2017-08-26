@@ -63,8 +63,8 @@ namespace Accounting.ViewModels
             contractsService = new ContractsService();
 
             FilteredContracts = contractsService.GetAllContracts();
-            FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
-            FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+            FilteredProviders = GetFilteredProviders();
+            FilteredBuyers = GetFilteredBuyers();
         }
 
         private void OnSelectedProviderChanged()
@@ -73,7 +73,7 @@ namespace Accounting.ViewModels
                 ? contractsService.GetContractsByProvider(selectedProvider)
                 : contractsService.GetContractsByProviderAndBuyer(selectedProvider, selectedBuyer);
 
-            FilteredBuyers = FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
+            FilteredBuyers = GetFilteredBuyers();
         }
 
         private void OnSelectedBuyerChanged()
@@ -82,7 +82,17 @@ namespace Accounting.ViewModels
                 ? contractsService.GetContractsByBuyer(selectedBuyer)
                 : contractsService.GetContractsByProviderAndBuyer(selectedProvider, selectedBuyer);
 
-            FilteredProviders = FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+            FilteredProviders = GetFilteredProviders();
+        }
+
+        private List<Provider> GetFilteredProviders()
+        {
+            return FilteredContracts.Select(c => c.Provider).Distinct().ToList();
+        }
+
+        private List<Buyer> GetFilteredBuyers()
+        {
+            return FilteredContracts.Select(c => c.Buyer).Distinct().ToList();
         }
 
         private void OnSelectedContractChanged()
