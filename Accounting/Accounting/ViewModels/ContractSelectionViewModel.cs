@@ -1,6 +1,5 @@
 ﻿using Accounting.Models;
 using Accounting.Models.Services;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,7 +7,7 @@ namespace Accounting.ViewModels
 {
     public class ContractSelectionViewModel : BindableBase
     {
-        private ContractsService contractsService;
+        private IContractsService contractsService;
         
         private List<Provider> filteredProviders;
 
@@ -57,16 +56,20 @@ namespace Accounting.ViewModels
             get { return selectedContract; }
             set { SetProperty(ref selectedContract, value, OnSelectedContractChanged); }
         }
-        
-        public ContractSelectionViewModel()
+
+        public ContractSelectionViewModel() : this(new ContractsService())
         {
-            contractsService = new ContractsService();
+        }
+
+        public ContractSelectionViewModel(IContractsService contractsService)
+        {
+            this.contractsService = contractsService;
 
             FilteredContracts = contractsService.GetAllContracts();
             FilteredProviders = GetFilteredProviders();
             FilteredBuyers = GetFilteredBuyers();
         }
-
+        
         private void OnSelectedProviderChanged()
         {
             FilteredContracts = selectedBuyer == null

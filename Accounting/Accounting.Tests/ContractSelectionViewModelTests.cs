@@ -1,5 +1,7 @@
-﻿using Accounting.ViewModels;
+﻿using Accounting.Models;
+using Accounting.ViewModels;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Linq;
 
 namespace Accounting.Tests
@@ -7,12 +9,27 @@ namespace Accounting.Tests
     [TestClass]
     public class ContractSelectionViewModelTests
     {
+        MockContractsService contractsService;
         ContractSelectionViewModel viewModel;
 
         [TestInitialize]
         public void ContractSelectionViewModelCanBeInstantiated()
         {
-            viewModel = new ContractSelectionViewModel();
+            contractsService = new MockContractsService();
+
+            var provider1 = new Provider { Name = "Provider1" };
+            var provider2 = new Provider { Name = "Provider2" };
+
+            var buyer1 = new Buyer { Name = "Buyer1", DateOfBirth = new DateTime(1990, 1, 1) };
+            var buyer2 = new Buyer { Name = "Buyer2", DateOfBirth = new DateTime(1990, 2, 2) };
+
+            var contract1 = new Contract { Number = "1", Provider = provider1, Buyer = buyer1 };
+            var contract2 = new Contract { Number = "2", Provider = provider2, Buyer = buyer2 };
+            var contract3 = new Contract { Number = "4", Provider = provider1, Buyer = buyer2 };
+
+            contractsService.Contracts.AddRange(new[] { contract1, contract2, contract3 });
+
+            viewModel = new ContractSelectionViewModel(contractsService);
         }
 
         [TestMethod]
@@ -129,8 +146,7 @@ namespace Accounting.Tests
             CollectionAssert.AreEqual(new[] { viewModel.SelectedProvider }, viewModel.FilteredProviders);
             CollectionAssert.AreEqual(new[] { viewModel.SelectedBuyer }, viewModel.FilteredBuyers);
         }
-
-
+        
         [TestMethod]
         public void GivenProviderIsSelectedWhenBuyerIsSelectedThenTheFilteredContractsAndProvidersAreUpdated()
         {
